@@ -1,5 +1,5 @@
 from unittest import TestCase
-from main import parse, parse_conditional
+from _parser import parse, parse_conditional
 
 
 class TestParse(TestCase):
