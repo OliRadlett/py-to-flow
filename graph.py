@@ -5,13 +5,16 @@ class Graph:
 
     graph_data = []
     node_index = 0
+    source = []
 
     def __init__(self, parsed_source):
+
+        self.source = parsed_source
 
         self.graph_data.append("digraph {\n")
         self.graph_data.append("Start [shape=rectangle, color=orange, fontcolor=navy];\n")
         self.generate_nodes(parsed_source)
-        self.generate_node_links(parsed_source)
+        self.generate_node_links(parsed_source, parent=0)
 
         self.graph_data.append("}")
 
@@ -57,8 +60,14 @@ class Graph:
 
                 else:
 
-                    self.graph_data.append(str(parent) + " -> " + str(i + parent) + ";\n")
+                    self.graph_data.append(str(parent - 1) + " -> " + str(i + parent) + ";\n")
+                    #print(line)
+                    #print(parent + i)
 
             else:
 
-                self.generate_node_links(line, parent=i)
+                #self.generate_node_links(line, parent=self.source.index(line))
+                self.generate_node_links(line, parent=0)
+                #print(line)
+                #print(self.source.index(line))
+                #print("INDEX: " + str(self.calculate_node_index(line, parsed_source)))
